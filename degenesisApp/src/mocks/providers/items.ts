@@ -14,7 +14,7 @@ export class Items {
 
 
   constructor() {
-    let items = [
+    /*let items = [
       {
         "name": "Burt Bear",
         "profilePic": "assets/img/speakers/bear.jpg",
@@ -50,11 +50,11 @@ export class Items {
         "profilePic": "assets/img/speakers/puppy.jpg",
         "about": "Paul is a Puppy."
       }
-    ];
+    ];*/
 
-    for (let item of items) {
+    /*for (let item of items) {
       this.items.push(new Item(item));
-    }
+    }*/
   }
 
   query(params?: any) {
