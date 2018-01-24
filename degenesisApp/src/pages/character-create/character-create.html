@@ -1,0 +1,71 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>Création de personnage</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+	<ion-segment [(ngModel)]="tab">
+		<ion-segment-button value="description">
+			Description
+		</ion-segment-button>
+		<ion-segment-button value="points">
+			Points
+		</ion-segment-button>
+		<ion-segment-button value="equipment">
+			Equipement
+		</ion-segment-button>
+	</ion-segment>
+	<div [ngSwitch]="tab">
+		<ion-list *ngSwitchCase="'description'">
+			<ion-item-divider color="light">Joueur</ion-item-divider>
+			<ion-item>
+				<ion-label stacked>Nom</ion-label>
+				<ion-input type="text" [(value)]="c.playerName"></ion-input>
+			</ion-item>
+			<ion-item-divider color="light">Personnage</ion-item-divider>
+			<ion-item>
+				<ion-label stacked>Nom</ion-label>
+				<ion-input type="text" [(value)]="c.name"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Âge</ion-label>
+				<ion-input type="number" [(value)]="c.age"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Expérience totale</ion-label>
+				<ion-input type="number" [(value)]="c.experience.total"></ion-input>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Expérience restante</ion-label>
+				<ion-input type="number" [(value)]="c.experience.remaining"></ion-input>
+			</ion-item>
+		</ion-list>
+		<ion-list *ngSwitchCase="'points'">
+			<ion-item>
+				<ion-label stacked>Ego</ion-label>
+				<ion-range dualKnobs="true" pin="true" [(ngModel)]="c.health.ego" [min]="c.health.ego.min" [max]="c.health.ego.max" step="1" snaps="true"></ion-range>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Sporulations</ion-label>
+				<ion-range dualKnobs="true" pin="true" [(ngModel)]="c.health.sporulations" [min]="c.health.sporulations.min" [max]="c.health.sporulations.max" step="1" snaps="true"></ion-range>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Blessures superficielles</ion-label>
+				<ion-range dualKnobs="true" pin="true" [(ngModel)]="c.health.wounds" [min]="c.health.wounds.min" [max]="c.health.wounds.max" step="1" snaps="true"></ion-range>
+			</ion-item>
+			<ion-item>
+				<ion-label stacked>Traumatismes</ion-label>
+				<ion-range dualKnobs="true" pin="true" [(ngModel)]="c.health.trauma" [min]="c.health.trauma.min" [max]="c.health.trauma.max" step="1" snaps="true"></ion-range>
+			</ion-item>
+		</ion-list>
+		<ion-list *ngSwitchCase="'equipment'">
+
+		</ion-list>
+	</div>
+	<button ion-button full>Sauvegarder</button>
+	<button ion-button full color="dark">Retour</button>
+</ion-content>

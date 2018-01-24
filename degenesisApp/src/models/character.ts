@@ -1,26 +1,28 @@
-import {Culture,Cult,Concept,Range,Weapon,Ammo,Armor,Item,Potential} from "./";
+import {Culture,Cult,Concept,Range,Weapon,Ammo,Armor,Item,Potential,Rank} from "./";
 
 export class Character {
-    name : string;
-    creationDate : Date;
-    deathDate : Date;
-    deathCause : string;
+    name : string = "";
+    playerName : string = "";
+    creationDate : Date= new Date();
+    deathDate : Date= new Date();
+    deathCause : string = "";
     experience : {
         total : number,
         remaining : number
     };
-    age : number;
-    birthLocation : string;
-    height : number;
-    weight : number;
-    skinColor : string;
-    hairColor : string;
-    portrait : string;
-    backgroundStory : string;
-    money : number;
-    culture : Culture;
-    cult : Cult;
-    concept : Concept;
+    age : number = 0;
+    birthLocation : string = "";
+    height : number = 0;
+    weight : number = 0;
+    skinColor : string = "";
+    hairColor : string = "";
+    portrait : string = "";
+    backgroundStory : string = "";
+    money : number = 0;
+    culture : Culture = new Culture();
+    cult : Cult = new Cult();
+    rank : Rank = new Rank();
+    concept : Concept = new Concept();
     
     health : {
         ego : Range,
@@ -98,9 +100,22 @@ export class Character {
         secrets : Range
     };
 
-    weapons : Array<Weapon>;
-    ammo : Array<Ammo>;
-    armors : Array<Ammo>;
-    items : Array<Item>;
-    potentials : Array<Potential>;
+    weapons : Array<Weapon> = [];
+    ammo : Array<Ammo> = [];
+    armors : Array<Armor> = [];
+    items : Array<Item> = [];
+    potentials : Array<Potential> = [];
+
+    constructor(){
+        this.experience = {
+            total : 0,
+            remaining : 0
+        };
+        this.health = {
+            ego : new Range(0,24),
+            sporulations : new Range(0,24),
+            wounds : new Range(0,24),
+            trauma : new Range(0,12)
+        };
+    }
 }
