@@ -111,13 +111,17 @@ export class Character {
             total : 0,
             remaining : 0
         };
+
         this.health = {
             ego : new Range(0,24),
             sporulations : new Range(0,24),
             wounds : new Range(0,24),
             trauma : new Range(0,12)
         };
-        
+        this.reinitPoints();        
+    }
+
+    reinitPoints(){
         this.PHY = {
             base : new Range(0,6,0,2),
             athletisme : new Range(0,6,0,2),
@@ -186,5 +190,18 @@ export class Character {
             ressources : new Range(0,6,0,3),
             secrets : new Range(0,6,0,3)
         };
+    }
+
+    changeCulture(culture : Culture){
+        this.reinitPoints();
+        this.culture = culture;
+        culture.bonus.attribute.forEach(b => {
+            this[b].base.upper++; 
+        });
+        culture.bonus.competence.forEach(b => {
+            b.c.forEach(c => {
+                this[b.a][c].upper++;
+            });
+        });
     }
 }

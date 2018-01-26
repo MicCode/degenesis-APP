@@ -16,6 +16,9 @@
 		<button ion-button (click)="scrollTo('description')">
 			<ion-icon name="contact"></ion-icon>
 		</button>
+		<button ion-button (click)="scrollTo('origins')">
+			<ion-icon name="ribbon"></ion-icon>
+		</button>
 		<button ion-button (click)="scrollTo('points')">
 			<ion-icon name="options"></ion-icon>
 		</button>
@@ -23,7 +26,6 @@
 			<ion-icon name="shirt"></ion-icon>
 		</button>
 	</ion-toolbar>
-
 </ion-header>
 
 
@@ -31,14 +33,12 @@
 
 	<ion-list id="description">
 		<ion-item-divider color="primary">DESCRIPTION GENERALE</ion-item-divider>
-		<ion-item-divider color="light">Joueur</ion-item-divider>
 		<ion-item>
-			<ion-label stacked>Nom</ion-label>
+			<ion-label stacked>Nom du joueur</ion-label>
 			<ion-input type="text" [(value)]="c.playerName"></ion-input>
 		</ion-item>
-		<ion-item-divider color="light">Personnage</ion-item-divider>
 		<ion-item>
-			<ion-label stacked>Nom</ion-label>
+			<ion-label stacked>Nom du personnage</ion-label>
 			<ion-input type="text" [(value)]="c.name"></ion-input>
 		</ion-item>
 		<ion-item>
@@ -46,13 +46,47 @@
 			<ion-input type="number" [(value)]="c.age"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label stacked>Expérience totale</ion-label>
+			<ion-label stacked>Eléments de background</ion-label>
+			<ion-textarea [(value)]="c.backgroundStory"></ion-textarea>
+		</ion-item>
+		<ion-item-divider color="light">Morphologie</ion-item-divider>
+		<ion-item>
+			<ion-label stacked>Taille</ion-label>
+			<ion-input type="number" [(value)]="c.height"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>Poids</ion-label>
+			<ion-input type="number" [(value)]="c.weight"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>Peau</ion-label>
+			<ion-input type="text" [(value)]="c.skinColor"></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label stacked>Cheveux</ion-label>
+			<ion-input type="text" [(value)]="c.hairColor"></ion-input>
+		</ion-item>
+		<ion-item-divider color="light">Expérience</ion-item-divider>
+		<ion-item>
+			<ion-label stacked>Totale</ion-label>
 			<ion-input type="number" [(value)]="c.experience.total"></ion-input>
 		</ion-item>
 		<ion-item>
-			<ion-label stacked>Expérience restante</ion-label>
+			<ion-label stacked>Restante</ion-label>
 			<ion-input type="number" [(value)]="c.experience.remaining"></ion-input>
 		</ion-item>
+	</ion-list>
+	<ion-list id="origins">
+		<ion-item-divider color="primary">ORIGINES / RANG</ion-item-divider>
+		<ion-item-divider color="light">Culture</ion-item-divider>		
+		<div class="culture-button" [ngClass]="culture.name == selectedCulture ? 'selected' : ''" *ngFor="let culture of cultures.all" (click)="changeCulture(culture)">
+			<img [src]="'assets/img/cultures/' + culture.logo"/>
+			<div class="culture-name">{{culture.name}}</div>
+		</div>
+		<ion-item-divider color="light">Concept</ion-item-divider>
+
+		<ion-item-divider color="light">Culte</ion-item-divider>
+
 	</ion-list>
 	<ion-list id="points">
 		<ion-item-divider color="primary">ATTRIBUTION DES POINTS</ion-item-divider>
