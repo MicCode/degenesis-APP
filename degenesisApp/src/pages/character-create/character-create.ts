@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, Content } from 'ionic-angular';
 import {Character} from '../../models';
 
 @IonicPage()
@@ -9,6 +9,7 @@ import {Character} from '../../models';
 	templateUrl: 'character-create.html'
 })
 export class CharacterCreatePage {
+	@ViewChild(Content) content: Content;
 	private c : Character = new Character();
 	private tab : string = "description";
 
@@ -28,5 +29,10 @@ export class CharacterCreatePage {
 	done() {
 		
 		this.viewCtrl.dismiss(this.c);
+	}
+
+	scrollTo(target){
+		let yOffset = document.getElementById(target).offsetTop;
+    	this.content.scrollTo(0, yOffset, 1)
 	}
 }

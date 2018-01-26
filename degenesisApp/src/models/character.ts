@@ -117,5 +117,74 @@ export class Character {
             wounds : new Range(0,24),
             trauma : new Range(0,12)
         };
+        
+        this.PHY = {
+            base : new Range(0,6,0,2),
+            athletisme : new Range(0,6,0,2),
+            corpsacorps : new Range(0,6,0,2),
+            force : new Range(0,6,0,2),
+            lutte : new Range(0,6,0,2),
+            resistance : new Range(0,6,0,2),
+            vigueur : new Range(0,6,0,2)
+        };
+    
+        this.AGI = {
+            base : new Range(0,6,0,2),
+            armesaprojectiles : new Range(0,6,0,2),
+            artisanat : new Range(0,6,0,2),
+            dexterite : new Range(0,6,0,2),
+            furtivite : new Range(0,6,0,2),
+            mobilite : new Range(0,6,0,2),
+            navigation : new Range(0,6,0,2)
+        };
+    
+        this.CHA = {
+            base : new Range(0,6,0,2),
+            art : new Range(0,6,0,2),
+            commandement : new Range(0,6,0,2),
+            consideration : new Range(0,6,0,2),
+            expression : new Range(0,6,0,2),
+            negociation : new Range(0,6,0,2),
+            seduction : new Range(0,6,0,2)
+        };
+    
+        this.INT = {
+            base : new Range(0,6,0,2),
+            concentration : new Range(0,6,0,2),
+            connaissancesart : new Range(0,6,0,2),
+            legendes : new Range(0,6,0,2),
+            medecine : new Range(0,6,0,2),
+            science : new Range(0,6,0,2),
+            technologie : new Range(0,6,0,2)
+        };
+    
+        this.PSY = {
+            base : new Range(0,6,0,2),
+            domination : new Range(0,6,0,2),
+            foi : new Range(0,6,0,2),
+            reactivite : new Range(0,6,0,2),
+            ruse : new Range(0,6,0,2),
+            tromperie : new Range(0,6,0,2),
+            volonte : new Range(0,6,0,2)
+        };
+    
+        this.INS = {
+            base : new Range(0,6,0,2), 
+            dressage : new Range(0,6,0,2),
+            empathie : new Range(0,6,0,2),
+            orientation : new Range(0,6,0,2),
+            perception : new Range(0,6,0,2),
+            pulsions : new Range(0,6,0,2),
+            survie : new Range(0,6,0,2)
+        };
+    
+        this.historique = {
+            allies : new Range(0,6,0,3),
+            autorite : new Range(0,6,0,3),
+            renommee : new Range(0,6,0,3),
+            reseau : new Range(0,6,0,3),
+            ressources : new Range(0,6,0,3),
+            secrets : new Range(0,6,0,3)
+        };
     }
 }
