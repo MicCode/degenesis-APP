@@ -4,6 +4,7 @@ import { Settings } from './settings/settings';
 import { User } from './user/user';
 import {Cultures} from './cultures';
 import {Concepts} from './concepts';
+import {Cults} from './cults';
 
 export {
     Api,
@@ -11,5 +12,6 @@ export {
     Settings,
     User,
     Cultures,
-    Concepts
+    Concepts,
+    Cults
 };
