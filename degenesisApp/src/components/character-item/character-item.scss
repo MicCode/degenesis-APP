@@ -1,0 +1,19 @@
+character-item{
+    .character-line{
+        .icons{
+            height: 80px;
+            text-align:center;
+            ion-col{
+                padding:0;
+                line-height:50px;
+                font-size:3em;
+                font-weight:bold;
+                img{
+                    height:50px;
+                    width:50px;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}

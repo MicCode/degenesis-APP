@@ -123,7 +123,7 @@ export class Character {
 
     reinitPoints(){
         this.PHY = {
-            base : new Range(0,6,0,2),
+            base : new Range(1,6,1,2),
             athletisme : new Range(0,6,0,2),
             corpsacorps : new Range(0,6,0,2),
             force : new Range(0,6,0,2),
@@ -133,7 +133,7 @@ export class Character {
         };
     
         this.AGI = {
-            base : new Range(0,6,0,2),
+            base : new Range(1,6,1,2),
             armesaprojectiles : new Range(0,6,0,2),
             artisanat : new Range(0,6,0,2),
             dexterite : new Range(0,6,0,2),
@@ -143,7 +143,7 @@ export class Character {
         };
     
         this.CHA = {
-            base : new Range(0,6,0,2),
+            base : new Range(1,6,1,2),
             art : new Range(0,6,0,2),
             commandement : new Range(0,6,0,2),
             consideration : new Range(0,6,0,2),
@@ -153,7 +153,7 @@ export class Character {
         };
     
         this.INT = {
-            base : new Range(0,6,0,2),
+            base : new Range(1,6,1,2),
             concentration : new Range(0,6,0,2),
             connaissancesart : new Range(0,6,0,2),
             legendes : new Range(0,6,0,2),
@@ -163,7 +163,7 @@ export class Character {
         };
     
         this.PSY = {
-            base : new Range(0,6,0,2),
+            base : new Range(1,6,1,2),
             domination : new Range(0,6,0,2),
             foi : new Range(0,6,0,2),
             reactivite : new Range(0,6,0,2),
@@ -173,7 +173,7 @@ export class Character {
         };
     
         this.INS = {
-            base : new Range(0,6,0,2), 
+            base : new Range(1,6,1,2), 
             dressage : new Range(0,6,0,2),
             empathie : new Range(0,6,0,2),
             orientation : new Range(0,6,0,2),
@@ -254,7 +254,7 @@ export class Character {
     }
 
     getAttributesCount():number{
-        return this.PHY.base.lower + this.AGI.base.lower + this.CHA.base.lower + this.INT.base.lower + this.PSY.base.lower + this.INS.base.lower;
+        return this.PHY.base.lower + this.AGI.base.lower + this.CHA.base.lower + this.INT.base.lower + this.PSY.base.lower + this.INS.base.lower - 6;
     }
 
     getCompetencesCount():number{

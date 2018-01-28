@@ -5,6 +5,7 @@ import { User } from './user/user';
 import {Cultures} from './cultures';
 import {Concepts} from './concepts';
 import {Cults} from './cults';
+import {Characters} from './characters';
 
 export {
     Api,
@@ -13,5 +14,6 @@ export {
     User,
     Cultures,
     Concepts,
-    Cults
+    Cults,
+    Characters
 };

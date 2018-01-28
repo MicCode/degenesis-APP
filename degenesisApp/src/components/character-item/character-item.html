@@ -1,0 +1,19 @@
+<ion-card class="character-line">
+    <ion-card-header>{{character.name}}</ion-card-header>
+    <ion-card-content>
+        <p>{{character.culture}}gdfgdfg / {{character.cult}} gzzgzg/ {{character.concept}}gzgz</p>
+        <p>Joueur : {{character.playerName}}</p>
+    </ion-card-content>
+    <ion-row class="icons">
+        <ion-col>
+            <img [src]="'assets/img/cultures/' + character.cultureLogo">
+        </ion-col>
+        <ion-col>
+            <img [src]="'assets/img/cults/' + character.cultLogo">
+        </ion-col>
+        <ion-col>2</ion-col>
+        <ion-col>
+            <img [src]="'assets/img/concepts/' + character.conceptLogo">
+        </ion-col>
+    </ion-row>
+</ion-card>

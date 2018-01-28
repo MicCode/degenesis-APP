@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController, Content } from 'ionic-angular';
 import {Character, Culture, Concept,Cult} from '../../models';
-import {Cultures,Concepts,Cults} from '../../providers/providers';
+import {Cultures,Concepts,Cults,Characters} from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -30,6 +30,7 @@ export class CharacterCreatePage {
 		public navCtrl: NavController, 
 		public viewCtrl: ViewController, 
 		public camera: Camera,
+		private characters : Characters
 	) {
 		this.currentPoints = {
 			attributes : 0,
@@ -79,10 +80,10 @@ export class CharacterCreatePage {
 			competences : this.c.getCompetencesCount(),
 			history : this.c.getHistoryCount()
 		};
-		console.log(this.currentPoints);
 	}
 
 	validate(){
-		console.log(this.c);
+		this.characters.saveCharacter(this.c);
+		
 	}
 }

@@ -15,14 +15,16 @@
 <ion-content>
 
 	<ion-list>
-		<ion-item-sliding *ngFor="let character of characters">
-			<button ion-item (click)="openCharacter(character)">
-
-			</button>
-
-			<ion-item-options>
-				<button ion-button color="danger" (click)="deleteCharacter(character)">
-					Supprimer
+		<ion-item-sliding *ngFor="let character of allCharacters">
+			<ion-item>
+				<character-item [character]="character"></character-item>		
+			</ion-item>
+			<ion-item-options side="right">
+				<button ion-button icon-only color="secondary" (click)="share(item)">
+					<ion-icon name="brush"></ion-icon>
+				</button>
+				<button ion-button icon-only color="danger" (click)="share(item)">
+					<ion-icon name="trash"></ion-icon>
 				</button>
 			</ion-item-options>
 		</ion-item-sliding>

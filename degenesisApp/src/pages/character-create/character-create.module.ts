@@ -7,6 +7,8 @@ import { CultureItem } from '../../components/culture-item/culture-item';
 import { ConceptItem } from '../../components/concept-item/concept-item';
 import { PointItem } from '../../components/point-item/point-item';
 import { CultItem } from '../../components/cult-item/cult-item';
+import { Characters } from '../../providers/providers';
+import { Storage } from '@ionic/storage';
 
 @NgModule({
 	declarations: [
@@ -22,6 +24,9 @@ import { CultItem } from '../../components/cult-item/cult-item';
 	],
 	exports: [
 		CharacterCreatePage
+	],
+	providers:[
+		Characters
 	]
 })
 export class CharacterCreatePageModule { }

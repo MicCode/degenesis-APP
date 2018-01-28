@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 
 import { Character } from '../../models';
+import { Characters } from '../../providers/providers';
 
 
 @IonicPage()
@@ -10,10 +11,13 @@ import { Character } from '../../models';
 	templateUrl: 'characters.html'
 })
 export class CharactersPage {
-	characters: Character[];
+	private allCharacters = [];
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
-		
+	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public characters : Characters) {
+		this.characters.getAll().then((all)=>{
+			this.allCharacters = all;
+			console.log(this.allCharacters);
+		});
 	}
 
 	ionViewDidLoad() {
