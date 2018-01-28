@@ -1,5 +1,5 @@
 <ion-item class="point-item">
     <ion-label stacked>{{label}}</ion-label>
-    <ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="point" [min]="point.min" [max]="point.max" step="1" snaps="true"></ion-range>
+    <ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="point" [min]="point.min" [max]="point.max" step="1" snaps="true" (ionChange)="changed()"></ion-range>
     <ion-label class="current-value">{{point.lower}}</ion-label>
 </ion-item>

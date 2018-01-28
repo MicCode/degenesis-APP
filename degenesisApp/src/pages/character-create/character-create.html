@@ -7,24 +7,45 @@
 		</ion-buttons>
 		<ion-title>Création de personnage</ion-title>
 		<ion-buttons end>
-			<button ion-button icon-only color="royal">
+			<button ion-button icon-only color="royal" (click)="validate()">
 				<ion-icon name="checkmark-circle-outline"></ion-icon>
 			</button>
 		</ion-buttons>
 	</ion-toolbar>
 	<ion-toolbar>
-		<button ion-button (click)="scrollTo('description')">
-			<ion-icon name="contact"></ion-icon>
-		</button>
-		<button ion-button (click)="scrollTo('origins')">
-			<ion-icon name="ribbon"></ion-icon>
-		</button>
-		<button ion-button (click)="scrollTo('points')">
-			<ion-icon name="options"></ion-icon>
-		</button>
-		<button ion-button (click)="scrollTo('equipment')">
-			<ion-icon name="shirt"></ion-icon>
-		</button>
+		<ion-grid>
+			<ion-row>
+				<ion-col col-3 class="quick-nav-button">
+					<button clear ion-button (click)="scrollTo('description')">
+						<ion-icon name="contact"></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col col-3 class="quick-nav-button">
+					<button clear ion-button (click)="scrollTo('origins')">
+						<ion-icon name="ribbon"></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col col-3 class="quick-nav-button">
+					<button clear ion-button (click)="scrollTo('points')">
+						<ion-icon name="options"></ion-icon>
+					</button>
+				</ion-col>
+				<ion-col col-3 class="quick-nav-button">
+					<button clear ion-button (click)="scrollTo('equipment')">
+						<ion-icon name="shirt"></ion-icon>
+					</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</ion-toolbar>
+	<ion-toolbar class="remaining-points">
+		<ion-grid>
+			<ion-row>
+				<ion-col col-4 [ngClass]="currentPoints.attributes > 10 ? 'wrong' : currentPoints.attributes == 10 ? 'ok' : ''">Attr. {{currentPoints.attributes}}/10</ion-col>
+				<ion-col col-4 [ngClass]="currentPoints.competences > 28 ? 'wrong' : currentPoints.competences == 28 ? 'ok' : ''">Comp. {{currentPoints.competences}}/28</ion-col>
+				<ion-col col-4 [ngClass]="currentPoints.history > 4 ? 'wrong' : currentPoints.history == 4 ? 'ok' : ''">Hist. {{currentPoints.history}}/4</ion-col>
+			</ion-row>
+		</ion-grid>
 	</ion-toolbar>
 </ion-header>
 
@@ -35,45 +56,45 @@
 		<ion-item-divider color="primary">DESCRIPTION GENERALE</ion-item-divider>
 		<ion-item>
 			<ion-label stacked>Nom du joueur</ion-label>
-			<ion-input type="text" [(value)]="c.playerName"></ion-input>
+			<ion-input type="text" [(ngModel)]="c.playerName"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Nom du personnage</ion-label>
-			<ion-input type="text" [(value)]="c.name"></ion-input>
+			<ion-input type="text" [(ngModel)]="c.name"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Âge</ion-label>
-			<ion-input type="number" [(value)]="c.age"></ion-input>
+			<ion-input type="number" [(ngModel)]="c.age"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Eléments de background</ion-label>
-			<ion-textarea [(value)]="c.backgroundStory"></ion-textarea>
+			<ion-textarea [(ngModel)]="c.backgroundStory"></ion-textarea>
 		</ion-item>
 		<ion-item-divider color="light">Morphologie</ion-item-divider>
 		<ion-item>
 			<ion-label stacked>Taille</ion-label>
-			<ion-input type="number" [(value)]="c.height"></ion-input>
+			<ion-input type="number" [(ngModel)]="c.height"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Poids</ion-label>
-			<ion-input type="number" [(value)]="c.weight"></ion-input>
+			<ion-input type="number" [(ngModel)]="c.weight"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Peau</ion-label>
-			<ion-input type="text" [(value)]="c.skinColor"></ion-input>
+			<ion-input type="text" [(ngModel)]="c.skinColor"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Cheveux</ion-label>
-			<ion-input type="text" [(value)]="c.hairColor"></ion-input>
+			<ion-input type="text" [(ngModel)]="c.hairColor"></ion-input>
 		</ion-item>
 		<ion-item-divider color="light">Expérience</ion-item-divider>
 		<ion-item>
 			<ion-label stacked>Totale</ion-label>
-			<ion-input type="number" [(value)]="c.experience.total"></ion-input>
+			<ion-input type="number" [(ngModel)]="c.experience.total"></ion-input>
 		</ion-item>
 		<ion-item>
 			<ion-label stacked>Restante</ion-label>
-			<ion-input type="number" [(value)]="c.experience.remaining"></ion-input>
+			<ion-input type="number" [(ngModel)]="c.experience.remaining"></ion-input>
 		</ion-item>
 	</ion-list>
 	<ion-list id="origins">
@@ -83,78 +104,79 @@
 		<ion-item-divider color="light">Concept</ion-item-divider>
 		<concept-item *ngFor="let concept of concepts.all" [concept]="concept" [selectedConcept]="selectedConcept" (click)="changeConcept(concept)"></concept-item>
 		<ion-item-divider color="light">Culte</ion-item-divider>
+		<cult-item *ngFor="let cult of cults.all" [cult]="cult" [selectedCult]="selectedCult" (click)="changeCult(cult)"></cult-item>
 
 	</ion-list>
 	<ion-list id="points">
 		<ion-item-divider color="primary">ATTRIBUTION DES POINTS</ion-item-divider>
-		
+
+		<ion-item-divider color="light">PHYSIQUE</ion-item-divider>
+		<point-item label="Base" [(point)]="c.PHY.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Athlétisme" [(point)]="c.PHY.athletisme" (slided)="updatePoints()"></point-item>
+		<point-item label="Corps à corps" [(point)]="c.PHY.corpsacorps" (slided)="updatePoints()"></point-item>
+		<point-item label="Force" [(point)]="c.PHY.force" (slided)="updatePoints()"></point-item>
+		<point-item label="Lutte" [(point)]="c.PHY.lutte" (slided)="updatePoints()"></point-item>
+		<point-item label="Résistance" [(point)]="c.PHY.resistance" (slided)="updatePoints()"></point-item>
+		<point-item label="Vigueur" [(point)]="c.PHY.vigueur" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">AGILITE</ion-item-divider>
+		<point-item label="Base" [(point)]="c.AGI.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Armes à projectiles" [(point)]="c.AGI.armesaprojectiles" (slided)="updatePoints()"></point-item>
+		<point-item label="Artisanat" [(point)]="c.AGI.artisanat" (slided)="updatePoints()"></point-item>
+		<point-item label="Dextérité" [(point)]="c.AGI.dexterite" (slided)="updatePoints()"></point-item>
+		<point-item label="Furtivité" [(point)]="c.AGI.furtivite" (slided)="updatePoints()"></point-item>
+		<point-item label="Mobilité" [(point)]="c.AGI.mobilite" (slided)="updatePoints()"></point-item>
+		<point-item label="Navigation" [(point)]="c.AGI.navigation" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">CHARISME</ion-item-divider>
+		<point-item label="Base" [(point)]="c.CHA.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Art" [(point)]="c.CHA.art" (slided)="updatePoints()"></point-item>
+		<point-item label="Commandement" [(point)]="c.CHA.commandement" (slided)="updatePoints()"></point-item>
+		<point-item label="Considération" [(point)]="c.CHA.consideration" (slided)="updatePoints()"></point-item>
+		<point-item label="Expression" [(point)]="c.CHA.expression" (slided)="updatePoints()"></point-item>
+		<point-item label="Négociation" [(point)]="c.CHA.negociation" (slided)="updatePoints()"></point-item>
+		<point-item label="Séduction" [(point)]="c.CHA.seduction" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">INTELLIGENCE</ion-item-divider>
+		<point-item label="Base" [(point)]="c.INT.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Concentration" [(point)]="c.INT.concentration" (slided)="updatePoints()"></point-item>
+		<point-item label="Connaissance des artefacts" [(point)]="c.INT.connaissancesart" (slided)="updatePoints()"></point-item>
+		<point-item label="Légendes" [(point)]="c.INT.legendes" (slided)="updatePoints()"></point-item>
+		<point-item label="Médecine" [(point)]="c.INT.medecine" (slided)="updatePoints()"></point-item>
+		<point-item label="Science" [(point)]="c.INT.science" (slided)="updatePoints()"></point-item>
+		<point-item label="Technologie" [(point)]="c.INT.technologie" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">PSYCHE</ion-item-divider>
+		<point-item label="Base" [(point)]="c.PSY.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Domination" [(point)]="c.PSY.domination" (slided)="updatePoints()"></point-item>
+		<point-item label="Foi" [(point)]="c.PSY.foi" (slided)="updatePoints()"></point-item>
+		<point-item label="Réactivité" [(point)]="c.PSY.reactivite" (slided)="updatePoints()"></point-item>
+		<point-item label="Ruse" [(point)]="c.PSY.ruse" (slided)="updatePoints()"></point-item>
+		<point-item label="Tromperie" [(point)]="c.PSY.tromperie" (slided)="updatePoints()"></point-item>
+		<point-item label="Volonté" [(point)]="c.PSY.volonte" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">INSTINCT</ion-item-divider>
+		<point-item label="Base" [(point)]="c.INS.base" (slided)="updatePoints()"></point-item>
+		<point-item label="Dressage" [(point)]="c.INS.dressage" (slided)="updatePoints()"></point-item>
+		<point-item label="Empathie" [(point)]="c.INS.empathie" (slided)="updatePoints()"></point-item>
+		<point-item label="Orientation" [(point)]="c.INS.orientation" (slided)="updatePoints()"></point-item>
+		<point-item label="Perception" [(point)]="c.INS.perception" (slided)="updatePoints()"></point-item>
+		<point-item label="Pulsions" [(point)]="c.INS.pulsions" (slided)="updatePoints()"></point-item>
+		<point-item label="Survie" [(point)]="c.INS.survie" (slided)="updatePoints()"></point-item>
+
+		<ion-item-divider color="light">HISTORIQUE</ion-item-divider>
+		<point-item label="Alliés" [(point)]="c.historique.allies" (slided)="updatePoints()"></point-item>
+		<point-item label="Autorité" [(point)]="c.historique.autorite" (slided)="updatePoints()"></point-item>
+		<point-item label="Renommée" [(point)]="c.historique.renommee" (slided)="updatePoints()"></point-item>
+		<point-item label="Réseau" [(point)]="c.historique.reseau" (slided)="updatePoints()"></point-item>
+		<point-item label="Ressources" [(point)]="c.historique.ressources" (slided)="updatePoints()"></point-item>
+		<point-item label="Secrets" [(point)]="c.historique.secrets" (slided)="updatePoints()"></point-item>
+
 		<ion-item-divider color="light">SANTE</ion-item-divider>
 		<point-item label="Ego" [(point)]="c.health.ego"></point-item>
 		<point-item label="Sporulations" [(point)]="c.health.sporulations"></point-item>
 		<point-item label="Blessures superficielles" [(point)]="c.health.wounds"></point-item>
 		<point-item label="Traumatismes" [(point)]="c.health.trauma"></point-item>
-
-		<ion-item-divider color="light">PHYSIQUE</ion-item-divider>
-		<point-item label="Base" [(point)]="c.PHY.base"></point-item>
-		<point-item label="Athlétisme" [(point)]="c.PHY.athletisme"></point-item>
-		<point-item label="Corps à corps" [(point)]="c.PHY.corpsacorps"></point-item>
-		<point-item label="Force" [(point)]="c.PHY.force"></point-item>
-		<point-item label="Lutte" [(point)]="c.PHY.lutte"></point-item>
-		<point-item label="Résistance" [(point)]="c.PHY.resistance"></point-item>
-		<point-item label="Vigueur" [(point)]="c.PHY.vigueur"></point-item>
-
-		<ion-item-divider color="light">AGILITE</ion-item-divider>
-		<point-item label="Base" [(point)]="c.AGI.base"></point-item>
-		<point-item label="Armes à projectiles" [(point)]="c.AGI.armesaprojectiles"></point-item>
-		<point-item label="Artisanat" [(point)]="c.AGI.artisanat"></point-item>
-		<point-item label="Dextérité" [(point)]="c.AGI.dexterite"></point-item>
-		<point-item label="Furtivité" [(point)]="c.AGI.furtivite"></point-item>
-		<point-item label="Mobilité" [(point)]="c.AGI.mobilite"></point-item>
-		<point-item label="Navigation" [(point)]="c.AGI.navigation"></point-item>
-
-		<ion-item-divider color="light">CHARISME</ion-item-divider>
-		<point-item label="Base" [(point)]="c.CHA.base"></point-item>
-		<point-item label="Art" [(point)]="c.CHA.art"></point-item>
-		<point-item label="Commandement" [(point)]="c.CHA.commandement"></point-item>
-		<point-item label="Considération" [(point)]="c.CHA.consideration"></point-item>
-		<point-item label="Expression" [(point)]="c.CHA.expression"></point-item>
-		<point-item label="Négociation" [(point)]="c.CHA.negociation"></point-item>
-		<point-item label="Séduction" [(point)]="c.CHA.seduction"></point-item>
-
-		<ion-item-divider color="light">INTELLIGENCE</ion-item-divider>
-		<point-item label="Base" [(point)]="c.INT.base"></point-item>
-		<point-item label="Concentration" [(point)]="c.INT.concentration"></point-item>
-		<point-item label="Connaissance des artefacts" [(point)]="c.INT.connaissancesart"></point-item>
-		<point-item label="Légendes" [(point)]="c.INT.legendes"></point-item>
-		<point-item label="Médecine" [(point)]="c.INT.medecine"></point-item>
-		<point-item label="Science" [(point)]="c.INT.science"></point-item>
-		<point-item label="Technologie" [(point)]="c.INT.technologie"></point-item>
-
-		<ion-item-divider color="light">PSYCHE</ion-item-divider>
-		<point-item label="Base" [(point)]="c.PSY.base"></point-item>
-		<point-item label="Domination" [(point)]="c.PSY.domination"></point-item>
-		<point-item label="Foi" [(point)]="c.PSY.foi"></point-item>
-		<point-item label="Réactivité" [(point)]="c.PSY.reactivite"></point-item>
-		<point-item label="Ruse" [(point)]="c.PSY.ruse"></point-item>
-		<point-item label="Tromperie" [(point)]="c.PSY.tromperie"></point-item>
-		<point-item label="Volonté" [(point)]="c.PSY.volonte"></point-item>
-
-		<ion-item-divider color="light">INSTINCT</ion-item-divider>
-		<point-item label="Base" [(point)]="c.INS.base"></point-item>
-		<point-item label="Dressage" [(point)]="c.INS.dressage"></point-item>
-		<point-item label="Empathie" [(point)]="c.INS.empathie"></point-item>
-		<point-item label="Orientation" [(point)]="c.INS.orientation"></point-item>
-		<point-item label="Perception" [(point)]="c.INS.perception"></point-item>
-		<point-item label="Pulsions" [(point)]="c.INS.pulsions"></point-item>
-		<point-item label="Survie" [(point)]="c.INS.survie"></point-item>
-
-		<ion-item-divider color="light">HISTORIQUE</ion-item-divider>
-		<point-item label="Alliés" [(point)]="c.historique.allies"></point-item>
-		<point-item label="Autorité" [(point)]="c.historique.autorite"></point-item>
-		<point-item label="Renommée" [(point)]="c.historique.renommee"></point-item>
-		<point-item label="Réseau" [(point)]="c.historique.reseau"></point-item>
-		<point-item label="Ressources" [(point)]="c.historique.ressources"></point-item>
-		<point-item label="Secrets" [(point)]="c.historique.secrets"></point-item>
 	</ion-list>
 	<ion-list id="equipment">
 		<ion-item-divider color="primary">EQUIPEMENT</ion-item-divider>

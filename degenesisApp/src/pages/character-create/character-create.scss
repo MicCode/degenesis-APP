@@ -32,4 +32,28 @@ page-character-create {
 			}
 		}
 	}
+	.quick-nav-button{
+		text-align:center;
+		button{
+			width:100%;
+			ion-icon{
+				font-size:2em;
+			}
+		}
+	}
+	.remaining-points{
+		text-align:center;
+		padding: 0;
+		margin: 0;
+		min-height: 20px;
+		height: 20px;
+		.wrong{
+			font-weight:bold;
+			color:red;
+		}
+		.ok{
+			font-weight:bold;
+			color:green;
+		}
+	}
 }

@@ -6,12 +6,14 @@ import { CharacterCreatePage } from './character-create';
 import { CultureItem } from '../../components/culture-item/culture-item';
 import { ConceptItem } from '../../components/concept-item/concept-item';
 import { PointItem } from '../../components/point-item/point-item';
+import { CultItem } from '../../components/cult-item/cult-item';
 
 @NgModule({
 	declarations: [
 		CharacterCreatePage,
 		CultureItem,
 		ConceptItem,
+		CultItem,
 		PointItem
 	],
 	imports: [

@@ -207,6 +207,18 @@ export class Character {
         }
     }
 
+    setCult(newCult? : Cult){
+        if(!newCult) var newCult = this.cult;
+        if(newCult && newCult.bonus){
+            newCult.bonus.forEach(b => {
+                b.c.forEach(c => {
+                    this[b.a][c].upper++;
+                });
+            });
+            this.cult = newCult;
+        }
+    }
+
     setConcept(newConcept? : Concept){
         if(!newConcept) var newConcept = this.concept;
         if(newConcept && newConcept.bonus){
@@ -223,12 +235,42 @@ export class Character {
     changeCulture(culture : Culture){
         this.reinitPoints();
         this.setCulture(culture);
+        this.setCult();
+        this.setConcept();
+    }
+
+    changeCult(cult : Cult){
+        this.reinitPoints();
+        this.setCulture();
+        this.setCult(cult);
         this.setConcept();
     }
 
     changeConcept(concept : Concept){
         this.reinitPoints();
         this.setCulture();
+        this.setCult();
         this.setConcept(concept);
+    }
+
+    getAttributesCount():number{
+        return this.PHY.base.lower + this.AGI.base.lower + this.CHA.base.lower + this.INT.base.lower + this.PSY.base.lower + this.INS.base.lower;
+    }
+
+    getCompetencesCount():number{
+        var count = 0;
+        Object.keys(this.PHY).forEach(key=>{ if(key != "base") count += this.PHY[key].lower;});
+        Object.keys(this.AGI).forEach(key=>{ if(key != "base") count += this.AGI[key].lower;});
+        Object.keys(this.CHA).forEach(key=>{ if(key != "base") count += this.CHA[key].lower;});
+        Object.keys(this.INT).forEach(key=>{ if(key != "base") count += this.INT[key].lower;});
+        Object.keys(this.PSY).forEach(key=>{ if(key != "base") count += this.PSY[key].lower;});
+        Object.keys(this.INS).forEach(key=>{ if(key != "base") count += this.INS[key].lower;});
+        return count;
+    }
+
+    getHistoryCount():number{
+        var count = 0;
+        Object.keys(this.historique).forEach(key=>{ count += this.historique[key].lower;});
+        return count;
     }
 }
