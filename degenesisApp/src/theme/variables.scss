@@ -25,7 +25,7 @@ $background-color:  #fff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    rgb(184, 0, 0),
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
@@ -80,91 +80,3 @@ $colors: (
 
 $range-ios-bar-height : 0 ;
 $range-md-bar-height : 0 ;
-.point-item{
-  .current-value{
-    width: 15%;
-    position: absolute;
-    text-align: center;
-    right: 0;
-    top: 20px;
-    font-weight: bold;
-    font-size: 1.5em;
-  }
-  .point-range{
-    padding: 0 20% 0 0 !important;
-    .range-slider{
-      .range-tick{
-        width: 20px !important;
-        height: 32px !important;
-        top:5px !important;
-        border-radius:0 !important;
-        background-color:white !important;
-        border:solid 1px black !important;
-        margin-left:-10px !important;
-        z-index: -1 !important;
-      }
-      .range-tick-active{
-        width: 20px !important;
-        height: 32px !important;
-        top:5px !important;
-        border-radius:0 !important;
-        background-color:lightgrey !important;
-        border:solid 1px black !important;
-        margin-left:-10px !important;
-        z-index: -1 !important;
-      }
-      .range-bar-active{
-        display:none !important;
-      }
-      .range-knob-handle{
-        .range-knob{
-          height:40px !important;
-          width: 22px !important;
-          border-radius:0 !important;
-          top: 1px !important;
-          margin-left: -2px;
-        }
-      }
-      & > .range-knob-handle{
-        .range-knob{
-          background-color:green !important;
-          z-index:3 !important;
-        }
-      }
-      & > .range-knob-handle ~ .range-knob-handle{
-        .range-knob{
-          background-color:black !important;
-          z-index:2 !important;
-        }
-      }
-    }
-  }
-}
-.culture-button{
-  height:100px ;
-  width:100px ;
-  margin:5px ;
-  padding:5px ;
-  display: inline-block;
-  text-align:center;
-  border:solid 2px grey;
-  border-radius:10px;
-
-  img{
-    width:70px;
-    height:70px;
-    margin: 0 auto !important;
-    background-color:transparent !important;
-  }
-  .culture-name{
-    width:100%;
-    line-height:20px;
-  }
-  &.selected{
-    border:solid 2px black;
-    background-color:rgb(233, 250, 255);
-    .culture-name{
-      font-weight:bold;
-    }
-  }
-}

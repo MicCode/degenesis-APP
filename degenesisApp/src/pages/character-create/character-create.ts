@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController, Content } from 'ionic-angular';
-import {Character, Culture} from '../../models';
-import {Cultures} from '../../providers/providers';
+import {Character, Culture, Concept} from '../../models';
+import {Cultures,Concepts} from '../../providers/providers';
 
 @IonicPage()
 @Component({
@@ -14,7 +14,9 @@ export class CharacterCreatePage {
 	private c : Character = new Character();
 	private tab : string = "description";
 	private cultures: Cultures = new Cultures();
+	private concepts: Concepts = new Concepts();
 	private selectedCulture : string = "";
+	private selectedConcept : string = "";
 
 	constructor(
 		public navCtrl: NavController, 
@@ -25,9 +27,13 @@ export class CharacterCreatePage {
 	}
 
 	changeCulture(newCulture : Culture){
-		console.log(newCulture);
 		this.selectedCulture = newCulture.name;
 		this.c.changeCulture(newCulture);
+	}
+
+	changeConcept(newConcept : Concept){
+		this.selectedConcept = newConcept.name;
+		this.c.changeConcept(newConcept);
 	}
 
 	ionViewDidLoad() {

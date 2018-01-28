@@ -192,16 +192,43 @@ export class Character {
         };
     }
 
+    setCulture(newCulture? : Culture){
+        if(!newCulture) var newCulture = this.culture;
+        if(newCulture && newCulture.bonus){
+            newCulture.bonus.attribute.forEach(b => {
+                this[b].base.upper++; 
+            });
+            newCulture.bonus.competence.forEach(b => {
+                b.c.forEach(c => {
+                    this[b.a][c].upper++;
+                });
+            });
+            this.culture = newCulture;
+        }
+    }
+
+    setConcept(newConcept? : Concept){
+        if(!newConcept) var newConcept = this.concept;
+        if(newConcept && newConcept.bonus){
+            this[newConcept.bonus.attribute].base.upper++;
+            newConcept.bonus.competence.forEach(b => {
+                b.c.forEach(c => {
+                    this[b.a][c].upper++;
+                });
+            });
+            this.concept = newConcept;
+        }
+    }
+
     changeCulture(culture : Culture){
         this.reinitPoints();
-        this.culture = culture;
-        culture.bonus.attribute.forEach(b => {
-            this[b].base.upper++; 
-        });
-        culture.bonus.competence.forEach(b => {
-            b.c.forEach(c => {
-                this[b.a][c].upper++;
-            });
-        });
+        this.setCulture(culture);
+        this.setConcept();
+    }
+
+    changeConcept(concept : Concept){
+        this.reinitPoints();
+        this.setCulture();
+        this.setConcept(concept);
     }
 }

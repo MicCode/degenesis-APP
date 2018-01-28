@@ -1,0 +1,62 @@
+point-item{
+    .point-item{
+        .current-value{
+            width: 15%;
+            position: absolute;
+            text-align: center;
+            right: 0;
+            top: 20px;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .point-range{
+            padding: 0 20% 0 0 !important;
+            .range-slider{
+                .range-tick{
+                    width: 20px !important;
+                    height: 32px !important;
+                    top:5px !important;
+                    border-radius:0 !important;
+                    background-color:white !important;
+                    border:solid 1px black !important;
+                    margin-left:-10px !important;
+                    z-index: -1 !important;
+                }
+                .range-tick-active{
+                    width: 20px !important;
+                    height: 32px !important;
+                    top:5px !important;
+                    border-radius:0 !important;
+                    background-color:lightgrey !important;
+                    border:solid 1px black !important;
+                    margin-left:-10px !important;
+                    z-index: -1 !important;
+                }
+                .range-bar-active{
+                    display:none !important;
+                }
+                .range-knob-handle{
+                    .range-knob{
+                        height:40px !important;
+                        width: 22px !important;
+                        border-radius:0 !important;
+                        top: 1px !important;
+                        margin-left: -2px;
+                    }
+                }
+                & > .range-knob-handle{
+                    .range-knob{
+                        background-color:green !important;
+                        z-index:3 !important;
+                    }
+                }
+                & > .range-knob-handle ~ .range-knob-handle{
+                    .range-knob{
+                        background-color:black !important;
+                        z-index:2 !important;
+                    }
+                }
+            }
+        }
+    }
+}

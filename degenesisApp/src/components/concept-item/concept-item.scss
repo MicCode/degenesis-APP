@@ -1,0 +1,31 @@
+concept-item{
+    .concept-button{
+        height:60px ;
+        width:120px ;
+        margin:5px ;
+        padding:5px ;
+        display: inline-block;
+        text-align:center;
+        border:solid 2px grey;
+        border-radius:10px;
+      
+        img{
+            width:30px;
+            height:30px;
+            margin: 0 auto !important;
+            background-color:transparent !important;
+        }
+        .concept-name{
+            width:100%;
+            line-height:20px;
+        }
+        &.selected{
+            border:solid 2px black;
+            background-color:map-get($colors,primary);
+            color:white;
+            img{
+                filter: invert(100%);
+            }
+        }
+    }
+}

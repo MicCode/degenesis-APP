@@ -1,0 +1,4 @@
+<div class="culture-button" [ngClass]="culture.name == selectedCulture ? 'selected' : ''">
+    <img [src]="'assets/img/cultures/' + culture.logo"/>
+    <div class="culture-name">{{culture.name}}</div>
+</div>

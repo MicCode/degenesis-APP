@@ -78,301 +78,83 @@
 	</ion-list>
 	<ion-list id="origins">
 		<ion-item-divider color="primary">ORIGINES / RANG</ion-item-divider>
-		<ion-item-divider color="light">Culture</ion-item-divider>		
-		<div class="culture-button" [ngClass]="culture.name == selectedCulture ? 'selected' : ''" *ngFor="let culture of cultures.all" (click)="changeCulture(culture)">
-			<img [src]="'assets/img/cultures/' + culture.logo"/>
-			<div class="culture-name">{{culture.name}}</div>
-		</div>
+		<ion-item-divider color="light">Culture</ion-item-divider>
+		<culture-item *ngFor="let culture of cultures.all" [culture]="culture" [selectedCulture]="selectedCulture" (click)="changeCulture(culture)"></culture-item>
 		<ion-item-divider color="light">Concept</ion-item-divider>
-
+		<concept-item *ngFor="let concept of concepts.all" [concept]="concept" [selectedConcept]="selectedConcept" (click)="changeConcept(concept)"></concept-item>
 		<ion-item-divider color="light">Culte</ion-item-divider>
 
 	</ion-list>
 	<ion-list id="points">
 		<ion-item-divider color="primary">ATTRIBUTION DES POINTS</ion-item-divider>
-		<!-- ////////////////////////////////////////////////////////////////// -->
+		
 		<ion-item-divider color="light">SANTE</ion-item-divider>
-		<ion-item class="point-item">
-			<ion-label stacked>Ego</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.health.ego" [min]="c.health.ego.min" [max]="c.health.ego.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.health.ego.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Sporulations</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.health.sporulations" [min]="c.health.sporulations.min" [max]="c.health.sporulations.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.health.sporulations.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Blessures superficielles</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.health.wounds" [min]="c.health.wounds.min" [max]="c.health.wounds.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.health.wounds.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Traumatismes</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.health.trauma" [min]="c.health.trauma.min" [max]="c.health.trauma.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.health.trauma.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Ego" [(point)]="c.health.ego"></point-item>
+		<point-item label="Sporulations" [(point)]="c.health.sporulations"></point-item>
+		<point-item label="Blessures superficielles" [(point)]="c.health.wounds"></point-item>
+		<point-item label="Traumatismes" [(point)]="c.health.trauma"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">PHYSIQUE</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.base" [min]="c.PHY.base.min" [max]="c.PHY.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Athlétisme</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.athletisme" [min]="c.PHY.athletisme.min" [max]="c.PHY.athletisme.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.athletisme.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Corps à corps</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.corpsacorps" [min]="c.PHY.corpsacorps.min" [max]="c.PHY.corpsacorps.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.corpsacorps.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Force</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.force" [min]="c.PHY.force.min" [max]="c.PHY.force.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.force.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Lutte</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.lutte" [min]="c.PHY.lutte.min" [max]="c.PHY.lutte.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.lutte.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Résistance</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.resistance" [min]="c.PHY.resistance.min" [max]="c.PHY.resistance.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.resistance.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Vigueur</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PHY.vigueur" [min]="c.PHY.vigueur.min" [max]="c.PHY.vigueur.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PHY.vigueur.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.PHY.base"></point-item>
+		<point-item label="Athlétisme" [(point)]="c.PHY.athletisme"></point-item>
+		<point-item label="Corps à corps" [(point)]="c.PHY.corpsacorps"></point-item>
+		<point-item label="Force" [(point)]="c.PHY.force"></point-item>
+		<point-item label="Lutte" [(point)]="c.PHY.lutte"></point-item>
+		<point-item label="Résistance" [(point)]="c.PHY.resistance"></point-item>
+		<point-item label="Vigueur" [(point)]="c.PHY.vigueur"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">AGILITE</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.base" [min]="c.AGI.base.min" [max]="c.AGI.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Armes à projectiles</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.armesaprojectiles" [min]="c.AGI.armesaprojectiles.min" [max]="c.AGI.armesaprojectiles.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.armesaprojectiles.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Artisanat</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.artisanat" [min]="c.AGI.artisanat.min" [max]="c.AGI.artisanat.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.artisanat.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Dextérité</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.dexterite" [min]="c.AGI.dexterite.min" [max]="c.AGI.dexterite.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.dexterite.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Furtivité</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.furtivite" [min]="c.AGI.furtivite.min" [max]="c.AGI.furtivite.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.furtivite.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Mobilité</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.mobilite" [min]="c.AGI.mobilite.min" [max]="c.AGI.mobilite.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.mobilite.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Navigation</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.AGI.navigation" [min]="c.AGI.navigation.min" [max]="c.AGI.navigation.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.AGI.navigation.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.AGI.base"></point-item>
+		<point-item label="Armes à projectiles" [(point)]="c.AGI.armesaprojectiles"></point-item>
+		<point-item label="Artisanat" [(point)]="c.AGI.artisanat"></point-item>
+		<point-item label="Dextérité" [(point)]="c.AGI.dexterite"></point-item>
+		<point-item label="Furtivité" [(point)]="c.AGI.furtivite"></point-item>
+		<point-item label="Mobilité" [(point)]="c.AGI.mobilite"></point-item>
+		<point-item label="Navigation" [(point)]="c.AGI.navigation"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">CHARISME</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.base" [min]="c.CHA.base.min" [max]="c.CHA.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Art</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.art" [min]="c.CHA.art.min" [max]="c.CHA.art.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.art.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Commandement</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.commandement" [min]="c.CHA.commandement.min" [max]="c.CHA.commandement.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.commandement.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Considération</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.consideration" [min]="c.CHA.consideration.min" [max]="c.CHA.consideration.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.consideration.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Expression</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.expression" [min]="c.CHA.expression.min" [max]="c.CHA.expression.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.expression.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Négociation</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.negociation" [min]="c.CHA.negociation.min" [max]="c.CHA.negociation.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.negociation.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Séduction</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.CHA.seduction" [min]="c.CHA.seduction.min" [max]="c.CHA.seduction.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.CHA.seduction.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.CHA.base"></point-item>
+		<point-item label="Art" [(point)]="c.CHA.art"></point-item>
+		<point-item label="Commandement" [(point)]="c.CHA.commandement"></point-item>
+		<point-item label="Considération" [(point)]="c.CHA.consideration"></point-item>
+		<point-item label="Expression" [(point)]="c.CHA.expression"></point-item>
+		<point-item label="Négociation" [(point)]="c.CHA.negociation"></point-item>
+		<point-item label="Séduction" [(point)]="c.CHA.seduction"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">INTELLIGENCE</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.base" [min]="c.INT.base.min" [max]="c.INT.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Concentration</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.concentration" [min]="c.INT.concentration.min" [max]="c.INT.concentration.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.concentration.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Connaissance des artefacts</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.connaissancesart" [min]="c.INT.connaissancesart.min" [max]="c.INT.connaissancesart.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.connaissancesart.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Légendes</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.legendes" [min]="c.INT.legendes.min" [max]="c.INT.legendes.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.legendes.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Médecine</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.medecine" [min]="c.INT.medecine.min" [max]="c.INT.medecine.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.medecine.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Science</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.science" [min]="c.INT.science.min" [max]="c.INT.science.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.science.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Technologie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INT.technologie" [min]="c.INT.technologie.min" [max]="c.INT.technologie.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INT.technologie.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.INT.base"></point-item>
+		<point-item label="Concentration" [(point)]="c.INT.concentration"></point-item>
+		<point-item label="Connaissance des artefacts" [(point)]="c.INT.connaissancesart"></point-item>
+		<point-item label="Légendes" [(point)]="c.INT.legendes"></point-item>
+		<point-item label="Médecine" [(point)]="c.INT.medecine"></point-item>
+		<point-item label="Science" [(point)]="c.INT.science"></point-item>
+		<point-item label="Technologie" [(point)]="c.INT.technologie"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">PSYCHE</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.base" [min]="c.PSY.base.min" [max]="c.PSY.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Domination</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.domination" [min]="c.PSY.domination.min" [max]="c.PSY.domination.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.domination.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Foi</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.foi" [min]="c.PSY.foi.min" [max]="c.PSY.foi.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.foi.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Réactivité</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.reactivite" [min]="c.PSY.reactivite.min" [max]="c.PSY.reactivite.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.reactivite.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Ruse</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.ruse" [min]="c.PSY.ruse.min" [max]="c.PSY.ruse.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.ruse.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Tromperie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.tromperie" [min]="c.PSY.tromperie.min" [max]="c.PSY.tromperie.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.tromperie.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Volonté</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.PSY.volonte" [min]="c.PSY.volonte.min" [max]="c.PSY.volonte.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.PSY.volonte.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.PSY.base"></point-item>
+		<point-item label="Domination" [(point)]="c.PSY.domination"></point-item>
+		<point-item label="Foi" [(point)]="c.PSY.foi"></point-item>
+		<point-item label="Réactivité" [(point)]="c.PSY.reactivite"></point-item>
+		<point-item label="Ruse" [(point)]="c.PSY.ruse"></point-item>
+		<point-item label="Tromperie" [(point)]="c.PSY.tromperie"></point-item>
+		<point-item label="Volonté" [(point)]="c.PSY.volonte"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">INSTINCT</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Base</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.base" [min]="c.INS.base.min" [max]="c.INS.base.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.base.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Dressage</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.dressage" [min]="c.INS.dressage.min" [max]="c.INS.dressage.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.dressage.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Empathie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.empathie" [min]="c.INS.empathie.min" [max]="c.INS.empathie.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.empathie.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Orientation</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.orientation" [min]="c.INS.orientation.min" [max]="c.INS.orientation.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.orientation.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Perception</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.perception" [min]="c.INS.perception.min" [max]="c.INS.perception.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.perception.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Pulsions</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.pulsions" [min]="c.INS.pulsions.min" [max]="c.INS.pulsions.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.pulsions.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Survie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.INS.survie" [min]="c.INS.survie.min" [max]="c.INS.survie.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.INS.survie.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Base" [(point)]="c.INS.base"></point-item>
+		<point-item label="Dressage" [(point)]="c.INS.dressage"></point-item>
+		<point-item label="Empathie" [(point)]="c.INS.empathie"></point-item>
+		<point-item label="Orientation" [(point)]="c.INS.orientation"></point-item>
+		<point-item label="Perception" [(point)]="c.INS.perception"></point-item>
+		<point-item label="Pulsions" [(point)]="c.INS.pulsions"></point-item>
+		<point-item label="Survie" [(point)]="c.INS.survie"></point-item>
 
-		<!-- ////////////////////////////////////////////////////////////////// -->
 		<ion-item-divider color="light">HISTORIQUE</ion-item-divider>
-		<ion-item  class="point-item">
-			<ion-label stacked>Dressage</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.allies" [min]="c.historique.allies.min" [max]="c.historique.allies.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.allies.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Empathie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.autorite" [min]="c.historique.autorite.min" [max]="c.historique.autorite.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.autorite.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Orientation</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.renommee" [min]="c.historique.renommee.min" [max]="c.historique.renommee.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.renommee.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Perception</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.reseau" [min]="c.historique.reseau.min" [max]="c.historique.reseau.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.reseau.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Pulsions</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.ressources" [min]="c.historique.ressources.min" [max]="c.historique.ressources.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.ressources.lower}}</ion-label>
-		</ion-item>
-		<ion-item  class="point-item">
-			<ion-label stacked>Survie</ion-label>
-			<ion-range class="point-range" dualKnobs="true" pin="true" [(ngModel)]="c.historique.secrets" [min]="c.historique.secrets.min" [max]="c.historique.secrets.max" step="1" snaps="true"></ion-range>
-			<ion-label class="current-value">{{c.historique.secrets.lower}}</ion-label>
-		</ion-item>
+		<point-item label="Alliés" [(point)]="c.historique.allies"></point-item>
+		<point-item label="Autorité" [(point)]="c.historique.autorite"></point-item>
+		<point-item label="Renommée" [(point)]="c.historique.renommee"></point-item>
+		<point-item label="Réseau" [(point)]="c.historique.reseau"></point-item>
+		<point-item label="Ressources" [(point)]="c.historique.ressources"></point-item>
+		<point-item label="Secrets" [(point)]="c.historique.secrets"></point-item>
 	</ion-list>
 	<ion-list id="equipment">
 		<ion-item-divider color="primary">EQUIPEMENT</ion-item-divider>
