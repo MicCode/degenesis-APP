@@ -1,4 +1,4 @@
-import {Cult,Item} from "./";
+import {Item} from "./";
 
 export class Rank {
     level : string;
@@ -6,5 +6,12 @@ export class Rank {
     requirements : Array<string>;
     effects : Array<string>;
     equipment : Array<Item>;
-    cult : Cult;
+
+    constructor(level?:string,name?:string,requirements?:Array<string>,effects?:Array<string>,equipment?:Array<Item>){
+        if(level) this.level = level;
+        if(name) this.name = name;
+        if(requirements) this.requirements = requirements;
+        if(effects) this.effects = effects;
+        if(equipment) this.equipment = equipment;
+    }
 }
