@@ -273,4 +273,14 @@ export class Character {
         Object.keys(this.historique).forEach(key=>{ count += this.historique[key].lower;});
         return count;
     }
+
+    checkCompletion():{complete:boolean,error:string}{
+        if(!this.name || this.name.length <= 0) return {complete:false,error:"noname"};
+        else if(!this.cult || !this.cult.name || this.cult.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.rank || !this.rank.name|| this.rank.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.culture || !this.culture.name || this.culture.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.concept || !this.concept.name|| this.concept.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(this.getCompetencesCount() < 28 || this.getAttributesCount() < 10 || this.getHistoryCount() < 4) return {complete:false,error:"badcount"};
+        else return {complete:true,error:"none"};
+    }
 }

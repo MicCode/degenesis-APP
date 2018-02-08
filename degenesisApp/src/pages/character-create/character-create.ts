@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { Camera } from '@ionic-native/camera';
-import { IonicPage, NavController, ViewController, Content } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, Content, AlertController } from 'ionic-angular';
 import {Character, Culture, Concept,Cult} from '../../models';
 import {Cultures,Concepts,Cults,Characters} from '../../providers/providers';
 
@@ -30,7 +30,8 @@ export class CharacterCreatePage {
 		public navCtrl: NavController, 
 		public viewCtrl: ViewController, 
 		public camera: Camera,
-		private characters : Characters
+		private characters : Characters,
+		public alertCtrl: AlertController
 	) {
 		this.currentPoints = {
 			attributes : 0,
@@ -56,17 +57,7 @@ export class CharacterCreatePage {
 	}
 
 	ionViewDidLoad() {
-		console.log(this.c);
-		console.log('test');
-	}
-	
-	cancel() {
-		this.viewCtrl.dismiss();
-	}
 
-	done() {
-		
-		this.viewCtrl.dismiss(this.c);
 	}
 
 	scrollTo(target){
@@ -83,7 +74,59 @@ export class CharacterCreatePage {
 	}
 
 	validate(){
+		console.log(this.c);
+		var completion = this.c.checkCompletion();
+		if(!completion.complete){
+			var alertTitle : string = "";
+			var alertMessage : string = "";
+			switch(completion.error){
+				case "noname" :
+					let alertNoName = this.alertCtrl.create({
+						title: "Pas de nom",
+						message: "Attention le personnage n'a pas de nom, impossible de l'enregistrer",
+						buttons: ["OK"]
+					});
+					alertNoName.present();
+					break;
+				case "incomplete" :
+					let missingInfos = "";
+					if(!this.c.cult || !this.c.cult.name || this.c.cult.name.length <= 0) missingInfos += "<br>- Culte ";
+					if(!this.c.rank || !this.c.rank.name || this.c.rank.name.length <= 0) missingInfos += "<br>- Rang ";
+					if(!this.c.culture || !this.c.culture.name || this.c.culture.name.length <= 0) missingInfos += "<br>- Culture ";
+					if(!this.c.concept || !this.c.concept.name || this.c.concept.name.length <= 0) missingInfos += "<br>- Concept ";
+
+
+					let confirmIncomplete = this.alertCtrl.create({
+						title: "Informations incomplètes",
+						message: "Les éléments suvants n'ont pas été définis : " + missingInfos,
+						buttons: [
+							{
+								text: 'Annuler',
+								handler: () => {
+
+								}
+							},
+							{
+								text: 'Sauvegarder quand même',
+								handler: () => {
+									this.saveAndClose();
+								}
+							}
+						]
+					});
+					confirmIncomplete.present();
+					break;
+			}
+			
+		}
+		else this.saveAndClose();
+	}
+
+	cancel(){
+		this.viewCtrl.dismiss(); 
+	}
+	saveAndClose(){
 		this.characters.saveCharacter(this.c);
-		
+		this.viewCtrl.dismiss(this.c);
 	}
 }
