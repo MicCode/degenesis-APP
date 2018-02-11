@@ -123,7 +123,7 @@ export class Character {
 
     reinitPoints(){
         this.PHY = {
-            base : new Range(1,6,1,3),
+            base : new Range(1,6,1,2),
             athletisme : new Range(0,6,0,2),
             corpsacorps : new Range(0,6,0,2),
             force : new Range(0,6,0,2),
@@ -133,7 +133,7 @@ export class Character {
         };
     
         this.AGI = {
-            base : new Range(1,6,1,3),
+            base : new Range(1,6,1,2),
             armesaprojectiles : new Range(0,6,0,2),
             artisanat : new Range(0,6,0,2),
             dexterite : new Range(0,6,0,2),
@@ -143,7 +143,7 @@ export class Character {
         };
     
         this.CHA = {
-            base : new Range(1,6,1,3),
+            base : new Range(1,6,1,2),
             art : new Range(0,6,0,2),
             commandement : new Range(0,6,0,2),
             consideration : new Range(0,6,0,2),
@@ -153,7 +153,7 @@ export class Character {
         };
     
         this.INT = {
-            base : new Range(1,6,1,3),
+            base : new Range(1,6,1,2),
             concentration : new Range(0,6,0,2),
             connaissancesart : new Range(0,6,0,2),
             legendes : new Range(0,6,0,2),
@@ -163,7 +163,7 @@ export class Character {
         };
     
         this.PSY = {
-            base : new Range(1,6,1,3),
+            base : new Range(1,6,1,2),
             domination : new Range(0,6,0,2),
             foi : new Range(0,6,0,2),
             reactivite : new Range(0,6,0,2),
@@ -173,7 +173,7 @@ export class Character {
         };
     
         this.INS = {
-            base : new Range(1,6,1,3), 
+            base : new Range(1,6,1,2), 
             dressage : new Range(0,6,0,2),
             empathie : new Range(0,6,0,2),
             orientation : new Range(0,6,0,2),
@@ -244,7 +244,6 @@ export class Character {
         this.setCulture();
         this.setCult(cult);
         this.setConcept();
-        this.rank = cult.ranks[0];
     }
 
     changeConcept(concept : Concept){
@@ -252,10 +251,6 @@ export class Character {
         this.setCulture();
         this.setCult();
         this.setConcept(concept);
-    }
-
-    changeRank(rank : Rank){
-        this.rank = rank;
     }
 
     getAttributesCount():number{
@@ -279,30 +274,13 @@ export class Character {
         return count;
     }
 
-    calculateHealth(){
-        let ego = this.INT.base.lower;
-        if(this.INT.concentration.lower > 0) ego += this.INT.concentration.lower;
-        else ego += this.INS.pulsions.lower;
-        ego = ego * 2;
-        let sporulations = this.PSY.base.lower;
-        if(this.PSY.foi.lower > 0) sporulations += this.PSY.foi.lower;
-        else sporulations += this.PSY.volonte.lower;
-        sporulations = sporulations * 2;
-        let wounds = (this.PHY.base.lower + this.PHY.resistance.lower) * 2;
-        let trauma = this.PHY.base.lower + this.PSY.base.lower;
-
-        this.health = {
-            ego : new Range(0,24,ego,ego),
-            sporulations : new Range(0,24,sporulations,sporulations),
-            wounds : new Range(0,24,wounds,wounds),
-            trauma : new Range(0,12,trauma,trauma)
-        }
-    }
-
-    calculateMoney(){
-        let rankLevel = 0;
-        if(this.rank) rankLevel = +this.rank.level;
-        if(this.cult) this.money = (rankLevel + this.historique.ressources.lower) * this.cult.moneyMultiplicator;
-        else this.money = 0;
+    checkCompletion():{complete:boolean,error:string}{
+        if(!this.name || this.name.length <= 0) return {complete:false,error:"noname"};
+        else if(!this.cult || !this.cult.name || this.cult.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.rank || !this.rank.name|| this.rank.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.culture || !this.culture.name || this.culture.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(!this.concept || !this.concept.name|| this.concept.name.length <= 0) return {complete:false,error:"incomplete"};
+        else if(this.getCompetencesCount() < 28 || this.getAttributesCount() < 10 || this.getHistoryCount() < 4) return {complete:false,error:"badcount"};
+        else return {complete:true,error:"none"};
     }
 }
