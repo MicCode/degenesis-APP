@@ -18,20 +18,20 @@ export class CharactersPage {
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public characters : Characters,private splashScreen: SplashScreen,private statusBar: StatusBar) {
 		this.splashScreen.hide();
 		this.statusBar.styleDefault();
+		this.refreshCharacters();
+	}
+
+	refreshCharacters(){
 		this.characters.getAll().then((all)=>{
 			this.allCharacters = all;
 		});
-	}
-
-	ionViewDidLoad() {
-
 	}
 
 	addCharacter() {
 		let addModal = this.modalCtrl.create('CharacterCreatePage');
 		addModal.onDidDismiss(character => {
 			if (character) {
-				
+				this.refreshCharacters();
 			}
 		})
 		addModal.present();

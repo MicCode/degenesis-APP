@@ -1,5 +1,5 @@
 <ion-card class="character-line">
-    <ion-card-header><span class="character-name">{{character.name}}</span> <i>({{character.playerName}})</i></ion-card-header>
+    <ion-card-header><span class="character-name">{{character.name}}</span> <i *ngIf="character.playerName != ''">({{character.playerName}})</i></ion-card-header>
     <ion-card-content>
         <p>{{character.culture}}</p>
         <p>{{character.concept}}</p>

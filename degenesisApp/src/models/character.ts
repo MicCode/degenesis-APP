@@ -244,6 +244,7 @@ export class Character {
         this.setCulture();
         this.setCult(cult);
         this.setConcept();
+        this.rank = cult.ranks[0];
     }
 
     changeConcept(concept : Concept){
@@ -251,6 +252,10 @@ export class Character {
         this.setCulture();
         this.setCult();
         this.setConcept(concept);
+    }
+
+    changeRank(rank : Rank){
+        this.rank = rank;
     }
 
     getAttributesCount():number{
@@ -272,6 +277,33 @@ export class Character {
         var count = 0;
         Object.keys(this.historique).forEach(key=>{ count += this.historique[key].lower;});
         return count;
+    }
+
+    calculateHealth(){
+        let ego = this.INT.base.lower;
+        if(this.INT.concentration.lower > 0) ego += this.INT.concentration.lower;
+        else ego += this.INS.pulsions.lower;
+        ego = ego * 2;
+        let sporulations = this.PSY.base.lower;
+        if(this.PSY.foi.lower > 0) sporulations += this.PSY.foi.lower;
+        else sporulations += this.PSY.volonte.lower;
+        sporulations = sporulations * 2;
+        let wounds = (this.PHY.base.lower + this.PHY.resistance.lower) * 2;
+        let trauma = this.PHY.base.lower + this.PSY.base.lower;
+
+        this.health = {
+            ego : new Range(0,24,ego,ego),
+            sporulations : new Range(0,24,sporulations,sporulations),
+            wounds : new Range(0,24,wounds,wounds),
+            trauma : new Range(0,12,trauma,trauma)
+        }
+    }
+
+    calculateMoney(){
+        let rankLevel = 0;
+        if(this.rank) rankLevel = +this.rank.level;
+        if(this.cult) this.money = (rankLevel + this.historique.ressources.lower) * this.cult.moneyMultiplicator;
+        else this.money = 0;
     }
 
     checkCompletion():{complete:boolean,error:string}{

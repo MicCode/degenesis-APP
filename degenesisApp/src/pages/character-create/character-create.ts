@@ -3,6 +3,7 @@ import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController, Content, AlertController } from 'ionic-angular';
 import {Character, Culture, Concept,Cult} from '../../models';
 import {Cultures,Concepts,Cults,Characters} from '../../providers/providers';
+import { Rank } from '../../models/rank';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,7 @@ export class CharacterCreatePage {
 	private selectedCulture : string = "";
 	private selectedCult : string = "";
 	private selectedConcept : string = "";
+	private selectedRank : string = "";
 
 	private currentPoints : {
 		attributes : number,
@@ -53,7 +55,13 @@ export class CharacterCreatePage {
 
 	changeCult(newCult : Cult){
 		this.selectedCult = newCult.name;
+		this.selectedRank = "";
 		this.c.changeCult(newCult);
+	}
+
+	changeRank(newRank : Rank){
+		this.selectedRank = newRank.name;
+		this.c.changeRank(newRank);
 	}
 
 	ionViewDidLoad() {
@@ -71,6 +79,8 @@ export class CharacterCreatePage {
 			competences : this.c.getCompetencesCount(),
 			history : this.c.getHistoryCount()
 		};
+		this.c.calculateHealth();
+		this.c.calculateMoney();
 	}
 
 	validate(){
@@ -115,6 +125,27 @@ export class CharacterCreatePage {
 						]
 					});
 					confirmIncomplete.present();
+					break;
+				case "badcount" : 
+					let confirmBadCount = this.alertCtrl.create({
+						title: "Problème de points",
+						message: "Attention, le bon nombre de points n'a pas été attribué",
+						buttons: [
+							{
+								text: 'Annuler',
+								handler: () => {
+
+								}
+							},
+							{
+								text: 'Sauvegarder quand même',
+								handler: () => {
+									this.saveAndClose();
+								}
+							}
+						]
+					});
+					confirmBadCount.present();
 					break;
 			}
 			
