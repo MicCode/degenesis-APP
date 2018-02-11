@@ -1,7 +1,7 @@
 <ion-header>
 	<ion-toolbar  color="primary">
 		<ion-buttons start>
-			<button ion-button icon-only color="royal">
+			<button ion-button icon-only color="royal" (click)="cancel()">
 				<ion-icon name="close"></ion-icon>
 			</button>
 		</ion-buttons>
@@ -105,6 +105,8 @@
 		<concept-item *ngFor="let concept of concepts.all" [concept]="concept" [selectedConcept]="selectedConcept" (click)="changeConcept(concept)"></concept-item>
 		<ion-item-divider color="light">Culte</ion-item-divider>
 		<cult-item *ngFor="let cult of cults.all" [cult]="cult" [selectedCult]="selectedCult" (click)="changeCult(cult)"></cult-item>
+		<ion-item-divider color="light">Rang</ion-item-divider>
+		<rank-item *ngFor="let rank of c.cult.ranks" [rank]="rank" [selectedRank]="selectedRank" (click)="changeRank(rank)"></rank-item>
 
 	</ion-list>
 	<ion-list id="points">
@@ -181,4 +183,8 @@
 	<ion-list id="equipment">
 		<ion-item-divider color="primary">EQUIPEMENT</ion-item-divider>
 	</ion-list>
+	<ion-item>
+		<ion-label stacked>Devises</ion-label>
+		<ion-input type="number" [(ngModel)]="c.money"></ion-input>
+	</ion-item>
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController, Content } from 'ionic-angular';
-import {Character, Culture, Concept,Cult} from '../../models';
+import {Character, Culture, Concept,Cult,Rank} from '../../models';
 import {Cultures,Concepts,Cults,Characters} from '../../providers/providers';
 
 @IonicPage()
@@ -19,6 +19,7 @@ export class CharacterCreatePage {
 	private selectedCulture : string = "";
 	private selectedCult : string = "";
 	private selectedConcept : string = "";
+	private selectedRank : string = "";
 
 	private currentPoints : {
 		attributes : number,
@@ -52,21 +53,21 @@ export class CharacterCreatePage {
 
 	changeCult(newCult : Cult){
 		this.selectedCult = newCult.name;
+		this.selectedRank = "";
 		this.c.changeCult(newCult);
 	}
 
+	changeRank(newRank : Rank){
+		this.selectedRank = newRank.name;
+		this.c.changeRank(newRank);
+	}
+
 	ionViewDidLoad() {
-		console.log(this.c);
-		console.log('test');
+
 	}
 	
 	cancel() {
 		this.viewCtrl.dismiss();
-	}
-
-	done() {
-		
-		this.viewCtrl.dismiss(this.c);
 	}
 
 	scrollTo(target){
@@ -80,10 +81,12 @@ export class CharacterCreatePage {
 			competences : this.c.getCompetencesCount(),
 			history : this.c.getHistoryCount()
 		};
+		this.c.calculateHealth();
+		this.c.calculateMoney();
 	}
 
 	validate(){
 		this.characters.saveCharacter(this.c);
-		
+		this.viewCtrl.dismiss(this.c);
 	}
 }

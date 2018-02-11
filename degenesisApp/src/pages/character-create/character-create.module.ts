@@ -9,6 +9,7 @@ import { PointItem } from '../../components/point-item/point-item';
 import { CultItem } from '../../components/cult-item/cult-item';
 import { Characters } from '../../providers/providers';
 import { Storage } from '@ionic/storage';
+import { RankItem } from '../../components/rank-item/rank-item';
 
 @NgModule({
 	declarations: [
@@ -16,7 +17,8 @@ import { Storage } from '@ionic/storage';
 		CultureItem,
 		ConceptItem,
 		CultItem,
-		PointItem
+		PointItem,
+		RankItem
 	],
 	imports: [
 		IonicPageModule.forChild(CharacterCreatePage),

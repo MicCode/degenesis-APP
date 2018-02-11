@@ -1,19 +1,20 @@
 <ion-card class="character-line">
-    <ion-card-header>{{character.name}}</ion-card-header>
+    <ion-card-header><span class="character-name">{{character.name}}</span> <i>({{character.playerName}})</i></ion-card-header>
     <ion-card-content>
-        <p>{{character.culture}} / {{character.cult}} / {{character.concept}}</p>
-        <p>Joueur : {{character.playerName}}</p>
+        <p>{{character.culture}}</p>
+        <p>{{character.concept}}</p>
+        <p>{{character.cult}} rang {{character.rankLevel}} - {{character.rankName}}</p>
     </ion-card-content>
     <ion-row class="icons">
         <ion-col>
             <img [src]="'assets/img/cultures/' + character.cultureLogo">
         </ion-col>
         <ion-col>
+            <img class="concept-logo" [src]="'assets/img/concepts/' + character.conceptLogo">
+        </ion-col>
+        <ion-col>
             <img [src]="'assets/img/cults/' + character.cultLogo">
         </ion-col>
-        <ion-col>2</ion-col>
-        <ion-col>
-            <img [src]="'assets/img/concepts/' + character.conceptLogo">
-        </ion-col>
+        <ion-col><span class="rank-level">{{character.rankLevel}}</span></ion-col>
     </ion-row>
 </ion-card>

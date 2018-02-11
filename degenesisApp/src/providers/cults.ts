@@ -41,7 +41,8 @@ export class Cults{
                 new Rank("5","Achéron"),
                 new Rank("5","Conseiller"),
                 new Rank("6","Baptiste")
-            ]
+            ],
+            50
         );
     }
 
@@ -65,7 +66,8 @@ export class Cults{
                 new Rank("4","Hécatéen"),
                 new Rank("4","Ammout"),
                 new Rank("5","Hogon")
-            ]
+            ],
+            100
         );
     }
 
@@ -98,8 +100,9 @@ export class Cults{
                 new Rank("3","Corneille"),
                 new Rank("3","Albatros"),
                 new Rank("3","Busard"),
-                new Rank("X","Phénix")
-            ]
+                new Rank("4","Phénix")
+            ],
+            200
         );
     }
 
@@ -124,7 +127,8 @@ export class Cults{
                 new Rank("4","Aspirant"),
                 new Rank("4","Halo"),
                 new Rank("5","Démagogue")
-            ]
+            ],
+            50
         );
     }
 
@@ -148,9 +152,10 @@ export class Cults{
                 new Rank("5","Fragment"),
                 new Rank("5","Paradigme"),
                 new Rank("5","Skalar"),
-                new Rank("O","Zéro"),
-                new Rank("X","Aiguille")
-            ]
+                new Rank("4","Zéro"),
+                new Rank("5","Aiguille")
+            ],
+            128
         );
     }
 
@@ -172,7 +177,8 @@ export class Cults{
                 new Rank("4","Chef de Clan"),
                 new Rank("5","Champion"),
                 new Rank("5","Fondateur")
-            ]
+            ],
+            50
         );
     }
 
@@ -200,7 +206,8 @@ export class Cults{
                 new Rank("5","Ours des Cavernes"),
                 new Rank("5","Légende"),
                 new Rank("5","Officier")
-            ]
+            ],
+            50
         );
     }
 
@@ -220,9 +227,10 @@ export class Cults{
                 new Rank("3","Chaga"),
                 new Rank("3","Simba"),
                 new Rank("4","Dumisai"),
-                new Rank("O","Moyo"),
-                new Rank("X","Kifo")
-            ]
+                new Rank("3","Moyo"),
+                new Rank("4","Kifo")
+            ],
+            100
         );
     }
 
@@ -253,7 +261,8 @@ export class Cults{
                 new Rank("5","Officier Supérieur"),
                 new Rank("5","Escouade P-26"),
                 new Rank("6","Commandant en Chef")
-            ]
+            ],
+            50
         );
     }
 
@@ -290,7 +299,8 @@ export class Cults{
                 new Rank("4","Prophète"),
                 new Rank("4","Oracle"),
                 new Rank("5","Fatum")
-            ]
+            ],
+            100
         );
     }
 
@@ -317,7 +327,8 @@ export class Cults{
                 new Rank("5","Commissaire"),
                 new Rank("6","Sénateur"),
                 new Rank("7","Juge Suprême")
-            ]
+            ],
+            50
         );
     }
 
@@ -344,7 +355,8 @@ export class Cults{
                 new Rank("5","Pillard"),
                 new Rank("5","Waziri")  ,
                 new Rank("5","Consul"),              
-            ]
+            ],
+            1000
         );
     }
 
@@ -374,9 +386,10 @@ export class Cults{
                 new Rank("5","Chef de Clinique"),
                 new Rank("6","Recteur"),
                 new Rank("6","Spécialiste"),
-                new Rank("O","Médecin de Village"),
-                new Rank("X","Ancien")
-            ]
+                new Rank("6","Médecin de Village"),
+                new Rank("6","Ancien")
+            ],
+            100
         );
     }
 }

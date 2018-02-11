@@ -25,7 +25,9 @@ export class Characters {
                 cult : character.cult.name,
                 cultLogo : character.cult.logo,
                 concept : character.concept.name,
-                conceptLogo : character.concept.logo
+                conceptLogo : character.concept.logo,
+                rankLevel : character.rank.level,
+                rankName : character.rank.name
             };
             if(alreadySaved > 0) existingCharacters[alreadySaved] = formattedChar;
             else existingCharacters.push(formattedChar);
