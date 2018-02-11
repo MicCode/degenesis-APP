@@ -17,7 +17,7 @@
 	<ion-list>
 		<ion-item-sliding *ngFor="let character of allCharacters">
 			<ion-item>
-				<character-item [character]="character"></character-item>		
+				<character-item [character]="character" (click)="openCharacter(character)"></character-item>		
 			</ion-item>
 			<ion-item-options side="right">
 				<button ion-button icon-only color="secondary" (click)="share(item)">

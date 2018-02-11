@@ -1,4 +1,5 @@
 import {Culture,Cult,Concept,Range,Weapon,Ammo,Armor,Item,Potential,Rank} from "./";
+import * as deepKeys from 'deep-keys';
 
 export class Character {
     name : string = "";
@@ -106,19 +107,26 @@ export class Character {
     items : Array<Item> = [];
     potentials : Array<Potential> = [];
 
-    constructor(){
-        this.experience = {
-            total : 0,
-            remaining : 0
-        };
+    constructor(json?:any){
+        if(json){
+            Object.assign(this,json);
+            console.log(json);
+            console.log(this);
+        }
+        else{
+            this.experience = {
+                total : 0,
+                remaining : 0
+            };
 
-        this.health = {
-            ego : new Range(0,24),
-            sporulations : new Range(0,24),
-            wounds : new Range(0,24),
-            trauma : new Range(0,12)
-        };
-        this.reinitPoints();        
+            this.health = {
+                ego : new Range(0,24),
+                sporulations : new Range(0,24),
+                wounds : new Range(0,24),
+                trauma : new Range(0,12)
+            };
+            this.reinitPoints();
+        }
     }
 
     reinitPoints(){

@@ -4,6 +4,7 @@ import { IonicPage, NavController, ViewController, Content, AlertController } fr
 import {Character, Culture, Concept,Cult} from '../../models';
 import {Cultures,Concepts,Cults,Characters} from '../../providers/providers';
 import { Rank } from '../../models/rank';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 @IonicPage()
 @Component({
@@ -33,13 +34,19 @@ export class CharacterCreatePage {
 		public viewCtrl: ViewController, 
 		public camera: Camera,
 		private characters : Characters,
-		public alertCtrl: AlertController
+		public alertCtrl: AlertController,
+		private params: NavParams
 	) {
-		this.currentPoints = {
-			attributes : 0,
-			competences : 0,
-			history : 0
-		};
+		if(params.get('character')){
+			this.c = new Character(params.get('character'));
+		}
+		else{
+			this.currentPoints = {
+				attributes : 0,
+				competences : 0,
+				history : 0
+			};
+		}
 		this.updatePoints();
 	}
 

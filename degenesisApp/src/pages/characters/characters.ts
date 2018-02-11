@@ -42,8 +42,14 @@ export class CharactersPage {
 	}
 
 	openCharacter(character: Character) {
-		this.navCtrl.push('CharacterDetailsPage', {
-			character: character
+		this.characters.getCharacter(character.name).then((c)=>{
+			let addModal = this.modalCtrl.create('CharacterCreatePage',{character:JSON.parse(c)});
+			addModal.onDidDismiss(cha => {
+				if (cha) {
+					this.refreshCharacters();
+				}
+			})
+			addModal.present();
 		});
 	}
 }
